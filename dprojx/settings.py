@@ -139,4 +139,4 @@ TEMPLATE_DIR = os.path.join(BASE_DIR,'templates')
 STATIC_DIR = os.path.join(BASE_DIR,'static')
 MEDIA_DIR = os.path.join(BASE_DIR,'media')
 
-django_heroku.settings(locals())
+#django_heroku.settings(locals())
