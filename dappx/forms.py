@@ -6,7 +6,7 @@ from django.forms import ModelForm, TextInput, DateInput, DateField
 from django.forms import modelformset_factory
 from tinymce.widgets import TinyMCE
 
-from .models import UserProfileInfo, Resume
+from .models import UserProfileInfo, Resume, Education
 from .models import WorkExperience, Certification, Career, Project, Additional_courses, Internship, \
     Achievement, Hobbies
 
@@ -98,18 +98,26 @@ CertificationFormSet = modelformset_factory(Certification, form=CertificationFor
 #
 # EducationFormSet = modelformset_factory(Education, form=EducationForm, formset=MyModelFormSet, max_num=3)
 
-
-class EducationForm(forms.Form):
-    exam = forms.CharField(max_length=100)
-    school = forms.CharField(max_length=100)
-    degree = forms.CharField(max_length=100)
-    cgpa = forms.FloatField()
-
-    def __str__(self):
-        return self.school
+class EducationForm(forms.ModelForm):
+    exam = forms.CharField()
 
     class Meta:
-        verbose_name_plural = "Education"
+        model = Education
+        fields = "__all__"
+        #fields = ['exam','school', 'degree','cgpa',]
+
+
+#class EducationForm(forms.Form):
+#    exam = forms.CharField(max_length=100)
+#    school = forms.CharField(max_length=100)
+#    degree = forms.CharField(max_length=100)
+#    cgpa = forms.FloatField()
+#
+#    def __str__(self):
+#        return self.school
+#
+#    class Meta:
+#        verbose_name_plural = "Education"
 
 
 class CareerForm(ModelForm):

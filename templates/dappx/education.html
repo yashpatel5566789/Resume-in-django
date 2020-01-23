@@ -1,26 +1,19 @@
 {% extends "dappx/base.html" %}
 {% load static %}
 {% block body_block %}
-<form action="" method="POST">
-    <div class="container">
-        <div class="jumbotron">
-            <h1>Profile here</h1>
 
-            <label for="{{ form.exam }}" class="mb-2 mr-sm-2">Exam:</label><br>
-            <input type="text" name="name" placeholder="Exam"><br>{{ form.exam }}
-            <label for="school" class="mb-2 mr-sm-2">School/College:</label><br>
-            <input type="text" name="name" placeholder="School/College"><br>
-            <label for="degree" class="mb-2 mr-sm-2">Board/University:</label><br>
-            <input type="text" name="name" placeholder="Board/University"><br>
-            <label for="cgpa" class="mb-2 mr-sm-2">Percentage/CGPA:</label><br>
-            <input type="number" name="name" placeholder="Percentage/CGPA"><br>
+<div class="container">
+    <div class="jumbotron">
+        <h1>Profile here</h1>
+        <form  method="post">
             {% csrf_token %}
-            {{ form }}
-
-            <div class="container"><br>
-                <a class="btn btn-primary" href="/dappx/project">Next</a>
+            {{ form.as_p }}
+            <input type="submit" value="Submit">
+        </form>
+        <div class="container"><br>
+            <a class="btn btn-primary" href="/dappx/project">Next</a>
         </div>
     </div>
-    </div>
-</form>
+</div>
+
 {% endblock %}

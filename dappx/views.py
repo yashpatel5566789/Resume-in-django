@@ -2,9 +2,10 @@ from dappx.forms import UserForm, UserProfileInfoForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect, HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render , redirect
 from django.urls import reverse
-
+from django.views.generic import TemplateView
+from .forms import EducationForm
 # from formtools.wizard.views import SessionWizardView
 from .forms import (
     ResumeForm,
@@ -14,6 +15,28 @@ from .forms import (
     CareerFormSet,
     # EducationFormSet
 )
+
+class EducationView(TemplateView):
+    template_name = 'dappx/education.html'
+
+    def get(self, request):
+        form = EducationForm()
+        # posts = Education.object.all()
+        args = {'form': form}
+        return render(request, self.template_name, args)
+
+    def post(self, request):
+        form = EducationForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            # post.resume = request.resume
+            post.save()
+            text = form.cleaned_data['exam']
+            form = EducationForm()
+            return redirect('/dappx/edu/')
+
+        args = {'form': form, 'text': text}
+        return render(request, self.template_name, args)
 
 
 def index(request):
@@ -28,19 +51,19 @@ def career(request):
     return render(request, 'dappx/career.html')
 
 
-def education(request):
-    if request.method == 'POST':
-        form = EducationForm(request.POST)
-        if form.is_valid():
-            return HttpResponseRedirect('/profile/')
-
-        else:
-            form = EducationForm()
-            form.save()
-
-    return render(request, 'dappx/education.html', {})
-
-    # return render(request,'dappx/education.html')
+#def education(request):
+#    if request.method == 'POST':
+#        form = EducationForm(request.POST)
+#        if form.is_valid():
+#            return HttpResponseRedirect('/profile/')
+#
+#        else:
+#            form = EducationForm()
+#            form.save()
+#
+#    return render(request, 'dappx/education.html', {})
+#
+#    # return render(request,'dappx/education.html')
 
 
 def project(request):
