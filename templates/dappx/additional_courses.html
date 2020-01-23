@@ -2,26 +2,24 @@
 {% load static %}
 {% block body_block %}
 <div class="container">
-<div class="jumbotron">
-<h1>Additional Courses</h1>
-<label for="name" class="mb-2 mr-sm-2">Courses/Certification:</label><br>
-
-  
-    <input type="text" id="myInput" placeholder="Courses/Certification">
-    <span onclick="newElement()" class="addBtn"> &nbsp; <button class="btn btn-primary btn-sm">Add</span></button>
-  
-  
-  <ul id="myUL">
-
-  </ul>
+    <div class="jumbotron">
+        <h1>Additional Courses</h1>
+        <label for="name" class="mb-2 mr-sm-2">Courses/Certification:</label><br>
 
 
+        <input type="text" id="myInput" placeholder="Courses/Certification">
+        <span onclick="newElement()" class="addBtn"> &nbsp; <button class="btn btn-primary btn-sm"/>Add</span>
 
 
-  <a class="btn btn-primary" href="/dappx/internship">Next</a>
+        <ul id="myUL">
+
+        </ul>
+
+
+        <a class="btn btn-primary" href="/dappx/internship">Next</a>
+    </div>
 </div>
-</div>
-</div>
+
 <script>
     // Create a "close" button and append it to each list item
     var myNodelist = document.getElementsByTagName("LI");
@@ -78,6 +76,7 @@
         }
       }
     }
-    </script>
+
+</script>
 {% endblock %}
   

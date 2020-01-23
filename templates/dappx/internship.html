@@ -2,20 +2,20 @@
 {% load static %}
 {% block body_block %}
 <div class="container">
-<div class="jumbotron">
-<h1>Internship</h1>
-<label for="name" class="mb-2 mr-sm-2">Company Name</label><br>
-<input type="text" name="name" placeholder="Company Name"><br>
-<label for="name" class="mb-2 mr-sm-2">Project Name:</label><br>
-<input type="text" name="name" placeholder="Project Name"><br>
+    <div class="jumbotron">
+        <h1>Internship</h1>
+        <label for="name" class="mb-2 mr-sm-2">Company Name</label><br>
+        <input type="text" name="name" placeholder="Company Name"><br>
+        <label for="name" class="mb-2 mr-sm-2">Project Name:</label><br>
+        <input type="text" name="name" placeholder="Project Name"><br>
 
-    <label>Start date: <br><input type=date id=start ></label><br>
-    <label>End date: <br><input type=date id=end ></label><br>
-    
+        <label>Start date: <br><input type=date id=start></label><br>
+        <label>End date: <br><input type=date id=end></label><br>
 
-<div1 class="container"><br>
-    <a class="btn btn-primary" href="/dappx/achievement">Next</a>
-</div>
+
+        <div class="container"><br>
+            <a class="btn btn-primary" href="/dappx/achievement">Next</a>
+    </div>
 </div>
 </div>
 {% endblock %}
@@ -32,4 +32,5 @@ end.addEventLiseter('change', function() {
     if (end.value)
         start.max = end.value;
 }, false);
+
 </script>
