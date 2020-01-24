@@ -4,11 +4,13 @@
 <div class="container">
     <div class="jumbotron">
         <h1>Achievements</h1>
-        <label for="name" class="mb-2 mr-sm-2">Achievements:</label><br>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Submit"><br>
+        </form><br>
 
-
-        <input type="text" id="myInput" placeholder="Achievements">
-        <span onclick="newElement()" class="addBtn"> &nbsp; <button class="btn btn-primary btn-sm"/>Add</span>
+        <span onclick="newElement()" class="addBtn"> &nbsp; <button class="btn btn-primary btn-sm">Add</button></span>
 
 
         <ul id="myUL">

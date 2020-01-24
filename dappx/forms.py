@@ -2,18 +2,18 @@ from django import forms
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.forms import BaseModelFormSet
-from django.forms import ModelForm, TextInput, DateInput, DateField
+from django.forms import ModelForm,TextInput,DateInput,DateField
 from django.forms import modelformset_factory
 from tinymce.widgets import TinyMCE
 
-from .models import UserProfileInfo, Resume, Education
-from .models import WorkExperience, Certification, Career, Project, Additional_courses, Internship, \
-    Achievement, Hobbies
+from .models import UserProfileInfo,Resume,Education
+from .models import WorkExperience,Certification,Career,Project,Additional_courses, \
+    Internship,Achievement,Hobbies,Profile
 
 
 class MyModelFormSet(BaseModelFormSet):
-    def __init__(self, *args, **kwargs):
-        super(MyModelFormSet, self).__init__(*args, **kwargs)
+    def __init__(self,*args,**kwargs):
+        super(MyModelFormSet,self).__init__(*args,**kwargs)
         for form in self.forms:
             form.empty_permitted = False
 
@@ -23,44 +23,45 @@ class UserForm(forms.ModelForm):
 
     class Meta():
         model = User
-        fields = ('username', 'password', 'email')
+        fields = ('username','password','email')
 
 
 class UserProfileInfoForm(forms.ModelForm):
     class Meta():
         model = UserProfileInfo
-        fields = ('portfolio_site', 'profile_pic')
+        fields = ('portfolio_site','profile_pic')
 
 
 class ResumeForm(ModelForm):
     class Meta:
         model = Resume
-        fields = ['name', 'user', 'id', ]
+        fields = ['name','user','id',]
         widgets = {'name': forms.TextInput(attrs={'placeholder': 'For example: Data Scientist or Sales Manager'}),
                    'user': forms.HiddenInput(),
-                   'id': forms.HiddenInput(), }
+                   'id': forms.HiddenInput(),}
         labels = {'name': 'Resume name'}
 
 
 class WorkExperienceForm(ModelForm):
-    start_date = DateField(required=False, input_formats=settings.DATE_INPUT_FORMATS,
+    start_date = DateField(required=False,input_formats=settings.DATE_INPUT_FORMATS,
                            widget=DateInput(format='%d/%m/%Y',
-                                            attrs={'class': 'date-picker', 'placeholder': 'DD/MM/YYYY'}))
-    end_date = DateField(required=False, input_formats=settings.DATE_INPUT_FORMATS,
+                                            attrs={'class': 'date-picker','placeholder': 'DD/MM/YYYY'}))
+    end_date = DateField(required=False,input_formats=settings.DATE_INPUT_FORMATS,
                          widget=DateInput(format='%d/%m/%Y',
-                                          attrs={'class': 'date-picker', 'placeholder': 'DD/MM/YYYY'}))
+                                          attrs={'class': 'date-picker','placeholder': 'DD/MM/YYYY'}))
 
     class Meta:
         model = WorkExperience
-        fields = ['position', 'company', 'city', 'start_date', 'end_date', 'achievements', 'resume', ]
-        widgets = {'achievements': TinyMCE(attrs={'class': 'objective-box', 'cols': 50, 'rows': 10}),
+        fields = ['position','company','city','start_date','end_date','achievements','resume',]
+        widgets = {'achievements': TinyMCE(attrs={'class': 'objective-box','cols': 50,'rows': 10}),
                    'position': TextInput(attrs={'placeholder': 'For example: Bank Teller'}),
                    'company': TextInput(attrs={'placeholder': 'For example: Bank Central Asia'}),
                    'city': TextInput(attrs={'placeholder': 'For example: Jakarta'}),
-                   'resume': forms.HiddenInput(), }
+                   'resume': forms.HiddenInput(),}
 
 
-WorkExperienceFormSet = modelformset_factory(WorkExperience, form=WorkExperienceForm, formset=MyModelFormSet, extra=1,
+WorkExperienceFormSet = modelformset_factory(WorkExperience,form=WorkExperienceForm,formset=MyModelFormSet,
+                                             extra=1,
                                              max_num=5)
 
 
@@ -73,7 +74,7 @@ class CertificationForm(ModelForm):
         fields = ['name',
                   # 'date_obtained',
                   # 'city',
-                  'resume', ]
+                  'resume',]
         widgets = {'name': TextInput(attrs={'placeholder': 'For example: Certified Technical Architect'}),
                    # 'city': TextInput(attrs={'placeholder': 'For example: New York'}),
                    'resume': forms.HiddenInput(),
@@ -81,7 +82,7 @@ class CertificationForm(ModelForm):
         labels = {'name': 'Certification name'}
 
 
-CertificationFormSet = modelformset_factory(Certification, form=CertificationForm, formset=MyModelFormSet, max_num=5)
+CertificationFormSet = modelformset_factory(Certification,form=CertificationForm,formset=MyModelFormSet,max_num=5)
 
 
 # class EducationForm(ModelForm):
@@ -97,6 +98,14 @@ CertificationFormSet = modelformset_factory(Certification, form=CertificationFor
 #
 #
 # EducationFormSet = modelformset_factory(Education, form=EducationForm, formset=MyModelFormSet, max_num=3)
+class ProfileForm(forms.ModelForm):
+    name = forms.CharField()
+
+    class Meta:
+        model = Profile
+        fields = "__all__"
+        # fields = ['exam','school', 'degree','cgpa',]
+
 
 class EducationForm(forms.ModelForm):
     exam = forms.CharField()
@@ -104,10 +113,10 @@ class EducationForm(forms.ModelForm):
     class Meta:
         model = Education
         fields = "__all__"
-        #fields = ['exam','school', 'degree','cgpa',]
+        # fields = ['exam','school', 'degree','cgpa',]
 
 
-#class EducationForm(forms.Form):
+# class EducationForm(forms.Form):
 #    exam = forms.CharField(max_length=100)
 #    school = forms.CharField(max_length=100)
 #    degree = forms.CharField(max_length=100)
@@ -119,66 +128,118 @@ class EducationForm(forms.ModelForm):
 #    class Meta:
 #        verbose_name_plural = "Education"
 
+class CareerForm(forms.ModelForm):
+    career = forms.CharField()
 
-class CareerForm(ModelForm):
     class Meta:
         model = Career
-        fields = ['career', 'resume', ]
-        widgets = {'career': TextInput(attrs={'placeholder': 'For example: Certified Technical Architect'}),
-                   'resume': forms.HiddenInput(), }
-        labels = {'career': 'career name'}
+        fields = "__all__"
+        # fields = ['exam','school', 'degree','cgpa',]
 
 
-CareerFormSet = modelformset_factory(Career, form=CareerForm, formset=MyModelFormSet, max_num=5)
+# class CareerForm(ModelForm):
+#    class Meta:
+#        model = Career
+#        fields = ['career', 'resume', ]
+#        widgets = {'career': TextInput(attrs={'placeholder': 'For example: Certified Technical Architect'}),
+#                   'resume': forms.HiddenInput(), }
+#        labels = {'career': 'career name'}
+#
+#
+# CareerFormSet = modelformset_factory(Career, form=CareerForm, formset=MyModelFormSet, max_num=5)
 
 
-class ProjectForm(ModelForm):
-    model = Project
-    fields = ['name', 'description', 'role', 'platform', 'resume', ]
-    widgets = {'name': TextInput(attrs={'placeholder': 'For example: Certified Technical Architect'}),
-               'description': TextInput(attrs={'placeholder': 'For example: Certified Technical Architect'}),
-               'role': TextInput(attrs={'placeholder': 'For example: Certified Technical Architect'}),
-               'platform': TextInput(attrs={'placeholder': 'For example: Certified Technical Architect'}),
-               'resume': forms.HiddenInput(), }
-    labels = {'name': 'project name'}
+class ProjectForm(forms.ModelForm):
+    project_name = forms.CharField()
+
+    class Meta:
+        model = Project
+        fields = "__all__"
+        # fields = ['exam','school', 'degree','cgpa',]
 
 
-class Additional_coursesForm(ModelForm):
-    model = Additional_courses
-    fields = ['name', 'resume', ]
-    widgets = {'name': TextInput(attrs={'placeholder': 'For example: Certified Technical Architect'}),
-               'resume': forms.HiddenInput(), }
-    labels = {'name': 'additional courses name'}
+# class ProjectForm(ModelForm):
+#    model = Project
+#    fields = ['name', 'description', 'role', 'platform', 'resume', ]
+#    widgets = {'name': TextInput(attrs={'placeholder': 'For example: Certified Technical Architect'}),
+#               'description': TextInput(attrs={'placeholder': 'For example: Certified Technical Architect'}),
+#               'role': TextInput(attrs={'placeholder': 'For example: Certified Technical Architect'}),
+#               'platform': TextInput(attrs={'placeholder': 'For example: Certified Technical Architect'}),
+#               'resume': forms.HiddenInput(), }
+#    labels = {'name': 'project name'}
 
 
-class InternshipForm(ModelForm):
-    start_date = DateField(required=False, input_formats=settings.DATE_INPUT_FORMATS,
-                           widget=DateInput(format='%d/%m/%Y',
-                                            attrs={'class': 'date-picker', 'placeholder': 'DD/MM/YYYY'}))
-    end_date = DateField(required=False, input_formats=settings.DATE_INPUT_FORMATS,
-                         widget=DateInput(format='%d/%m/%Y',
-                                          attrs={'class': 'date-picker', 'placeholder': 'DD/MM/YYYY'}))
+# class Additional_coursesForm(ModelForm):
+#    model = Additional_courses
+#    fields = ['name', 'resume', ]
+#    widgets = {'name': TextInput(attrs={'placeholder': 'For example: Certified Technical Architect'}),
+#               'resume': forms.HiddenInput(), }
+#    labels = {'name': 'additional courses name'}
+
+
+class InternshipForm(forms.ModelForm):
+    project_name = forms.CharField()
 
     class Meta:
         model = Internship
-        fields = ['company_name', 'project_name', 'start_date', 'end_date', 'resume', ]
-        widgets = {
-            'company_name': TextInput(attrs={'placeholder': 'For example: Bank Teller'}),
-            'project_name': TextInput(attrs={'placeholder': 'For example: Bank Central Asia'}),
-            'resume': forms.HiddenInput(), }
+        fields = "__all__"
+        # fields = ['exam','school', 'degree','cgpa',]
 
 
-class AchievementForm(ModelForm):
-    model = Achievement
-    fields = ['achievement', 'resume', ]
-    widgets = {'achievement': TextInput(attrs={'placeholder': 'For example: Certified Technical Architect'}),
-               'resume': forms.HiddenInput(), }
-    labels = {'achievement': 'career name'}
+# class InternshipForm(ModelForm):
+#    start_date = DateField(required=False, input_formats=settings.DATE_INPUT_FORMATS,
+#                           widget=DateInput(format='%d/%m/%Y',
+#                                            attrs={'class': 'date-picker', 'placeholder': 'DD/MM/YYYY'}))
+#    end_date = DateField(required=False, input_formats=settings.DATE_INPUT_FORMATS,
+#                         widget=DateInput(format='%d/%m/%Y',
+#                                          attrs={'class': 'date-picker', 'placeholder': 'DD/MM/YYYY'}))
+#
+#    class Meta:
+#        model = Internship
+#        fields = ['company_name', 'project_name', 'start_date', 'end_date', 'resume', ]
+#        widgets = {
+#            'company_name': TextInput(attrs={'placeholder': 'For example: Bank Teller'}),
+#            'project_name': TextInput(attrs={'placeholder': 'For example: Bank Central Asia'}),
+#            'resume': forms.HiddenInput(), }
+#
+
+class AchievementForm(forms.ModelForm):
+    achievement = forms.CharField()
+
+    class Meta:
+        model = Achievement
+        fields = "__all__"
+        # fields = ['exam','school', 'degree','cgpa',]
 
 
-class HobbiesForm(ModelForm):
-    model = Hobbies
-    fields = ['hobbies', 'resume', ]
-    widgets = {'hobbies': TextInput(attrs={'placeholder': 'For example: Certified Technical Architect'}),
-               'resume': forms.HiddenInput(), }
-    labels = {'hobbies': 'career name'}
+# class AchievementForm(ModelForm):
+#    model = Achievement
+#    fields = ['achievement', 'resume', ]
+#    widgets = {'achievement': TextInput(attrs={'placeholder': 'For example: Certified Technical Architect'}),
+#               'resume': forms.HiddenInput(), }
+#    labels = {'achievement': 'career name'}
+#
+class HobbiesForm(forms.ModelForm):
+    hobbies = forms.CharField()
+
+    class Meta:
+        model = Hobbies
+        fields = "__all__"
+        # fields = ['exam','school', 'degree','cgpa',]
+
+
+# class HobbiesForm(ModelForm):
+#    model = Hobbies
+#    fields = ['hobbies', 'resume', ]
+#    widgets = {'hobbies': TextInput(attrs={'placeholder': 'For example: Certified Technical Architect'}),
+#               'resume': forms.HiddenInput(), }
+#    labels = {'hobbies': 'career name'}
+
+
+class Additional_coursesForm(forms.ModelForm):
+    course_name = forms.CharField()
+
+    class Meta:
+        model = Additional_courses
+        fields = "__all__"
+        # fields = ['exam','school', 'degree','cgpa',]

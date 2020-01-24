@@ -4,14 +4,11 @@
 <div class="container">
     <div class="jumbotron">
         <h1>Project</h1>
-        <label for="name" class="mb-2 mr-sm-2">Project Name:</label><br>
-        <input type="text" name="name" placeholder="Project Name"><br>
-        <label for="name" class="mb-2 mr-sm-2">Description:</label><br>
-        <textarea class="form-control" rows="2" name="text" placeholder="Description"></textarea><br>
-        <label for="name" class="mb-2 mr-sm-2">Role:</label><br>
-        <input type="text" name="name" placeholder="Role"><br>
-        <label for="Name" class="mb-2 mr-sm-2">Technology/Platforms:</label><br>
-        <input type="text " name="name" placeholder="Technology/Platforms"><br>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Submit">
+        </form>
         <div class="container"><br>
             <a class="btn btn-primary" href="/dappx/additional">Next</a>
         </div>

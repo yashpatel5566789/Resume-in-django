@@ -4,11 +4,12 @@
 <div class="container">
     <div class="jumbotron">
         <h1>Additional Courses</h1>
-        <label for="name" class="mb-2 mr-sm-2">Courses/Certification:</label><br>
-
-
-        <input type="text" id="myInput" placeholder="Courses/Certification">
-        <span onclick="newElement()" class="addBtn"> &nbsp; <button class="btn btn-primary btn-sm"/>Add</span>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Submit">
+        </form><br>
+        <span onclick="newElement()" class="addBtn"> &nbsp; <Button class="btn btn-primary btn-sm">Add</Button></span>
 
 
         <ul id="myUL">

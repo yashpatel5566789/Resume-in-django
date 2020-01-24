@@ -4,8 +4,11 @@
 <div class="container">
     <div class="jumbotron">
         <h1>Career Objective</h1>
-        <label for="textarea" class="mb-2 mr-sm-2">Career:</label><br>
-        <textarea class="form-control" rows="5" name="text"></textarea><br>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Submit">
+        </form>
         <div class="container">
             <a class="btn btn-primary" href="/dappx/education">Next</a>
         </div>
