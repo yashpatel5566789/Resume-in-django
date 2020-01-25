@@ -10,10 +10,12 @@
             {{ form.as_p }}
             <input type="submit" value="Submit">
         </form>
-        <h2>{{ text }}</h2>
-        {% for post in posts %}
-        <h1>{{ post.post }}</h1>
-        <p>{{ post.resume.get_full }}</p>
+        {% for q in qs %}
+        <h6>{{ q.resume }}</h6>
+        <h6>exam: {{ q.exam }}</h6>
+        <h6>school: {{ q.school }}</h6>
+        <h6>Degree: {{ q.degree }}</h6>
+        <h6>cpga: {{ q.cgpa }}</h6><br>
         {% endfor %}
         <div class="container"><br>
             <a class="btn btn-primary" href="/dappx/project">Next</a>

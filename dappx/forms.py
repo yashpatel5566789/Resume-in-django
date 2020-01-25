@@ -5,7 +5,6 @@ from django.forms import BaseModelFormSet
 from django.forms import ModelForm,TextInput,DateInput,DateField
 from django.forms import modelformset_factory
 from tinymce.widgets import TinyMCE
-
 from .models import UserProfileInfo,Resume,Education
 from .models import WorkExperience,Certification,Career,Project,Additional_courses, \
     Internship,Achievement,Hobbies,Profile
