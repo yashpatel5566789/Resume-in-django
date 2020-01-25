@@ -1,8 +1,8 @@
-from dappx.forms import UserForm, UserProfileInfoForm
-from django.contrib.auth import authenticate, login, logout
+from dappx.forms import UserForm,UserProfileInfoForm
+from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseRedirect, HttpResponse
-from django.shortcuts import render, redirect
+from django.http import HttpResponseRedirect,HttpResponse
+from django.shortcuts import render,redirect
 from django.urls import reverse
 from django.views.generic import TemplateView
 from .forms import EducationForm
@@ -22,33 +22,34 @@ from .forms import (
     # CareerFormSet,
     # EducationFormSet
 )
+from .models import Education
 
 
 class EducationView(TemplateView):
     template_name = 'dappx/education.html'
 
-    def get(self, request):
+    def get(self,request):
         form = EducationForm()
-        # posts = Education.object.all()
-        args = {'form': form}
-        return render(request, self.template_name, args)
+        posts = Education.object.all()
+        args = {'form': form,'posts': posts}
+        return render(request,self.template_name,args)
 
-    def post(self, request):
+    def post(self,request):
         form = EducationForm(request.POST)
         if form.is_valid():
             post = form.save(commit=False)
-            # post.resume = request.resume
+            post.resume = request.resume
             post.save()
-            # text = form.cleaned_data['exam']
-            # form = EducationForm()
+            #text = form.cleaned_data['exam']
+            #form = EducationForm()
             return redirect('/dappx/education/')
 
         args = {'form': form}
-        return render(request, self.template_name, args)
+        return render(request,self.template_name,args)
 
 
 def index(request):
-    return render(request, 'dappx/index.html')
+    return render(request,'dappx/index.html')
 
 
 class ProfileView(TemplateView):
@@ -74,20 +75,20 @@ class ProfileView(TemplateView):
         return render(request,self.template_name,args)
 
 
-#def profile(request):
+# def profile(request):
 #    return render(request,'dappx/profile.html')
 
 
 class CareerView(TemplateView):
     template_name = 'dappx/career.html'
 
-    def get(self, request):
+    def get(self,request):
         form = CareerForm()
         # posts = Education.object.all()
         args = {'form': form}
-        return render(request, self.template_name, args)
+        return render(request,self.template_name,args)
 
-    def post(self, request):
+    def post(self,request):
         form = CareerForm(request.POST)
         if form.is_valid():
             post = form.save(commit=False)
@@ -98,7 +99,7 @@ class CareerView(TemplateView):
             return redirect('/dappx/career/')
 
         args = {'form': form}
-        return render(request, self.template_name, args)
+        return render(request,self.template_name,args)
 
 
 # def career(request):
@@ -122,13 +123,13 @@ class CareerView(TemplateView):
 class ProjectView(TemplateView):
     template_name = 'dappx/project.html'
 
-    def get(self, request):
+    def get(self,request):
         form = ProjectForm()
         # posts = Education.object.all()
         args = {'form': form}
-        return render(request, self.template_name, args)
+        return render(request,self.template_name,args)
 
-    def post(self, request):
+    def post(self,request):
         form = ProjectForm(request.POST)
         if form.is_valid():
             post = form.save(commit=False)
@@ -139,7 +140,7 @@ class ProjectView(TemplateView):
             return redirect('/dappx/project/')
 
         args = {'form': form}
-        return render(request, self.template_name, args)
+        return render(request,self.template_name,args)
 
 
 # def project(request):
@@ -147,13 +148,13 @@ class ProjectView(TemplateView):
 class Additional_coursesView(TemplateView):
     template_name = 'dappx/additional_courses.html'
 
-    def get(self, request):
+    def get(self,request):
         form = Additional_coursesForm()
         # posts = Education.object.all()
         args = {'form': form}
-        return render(request, self.template_name, args)
+        return render(request,self.template_name,args)
 
-    def post(self, request):
+    def post(self,request):
         form = Additional_coursesForm(request.POST)
         if form.is_valid():
             post = form.save(commit=False)
@@ -164,23 +165,23 @@ class Additional_coursesView(TemplateView):
             return redirect('/dappx/additional/')
 
         args = {'form': form}
-        return render(request, self.template_name, args)
+        return render(request,self.template_name,args)
 
 
-#def additional(request):
+# def additional(request):
 #    return render(request, 'dappx/additional_courses.html')
 
 
 class InternshipView(TemplateView):
     template_name = 'dappx/internship.html'
 
-    def get(self, request):
+    def get(self,request):
         form = InternshipForm()
         # posts = Education.object.all()
         args = {'form': form}
-        return render(request, self.template_name, args)
+        return render(request,self.template_name,args)
 
-    def post(self, request):
+    def post(self,request):
         form = InternshipForm(request.POST)
         if form.is_valid():
             post = form.save(commit=False)
@@ -191,7 +192,7 @@ class InternshipView(TemplateView):
             return redirect('/dappx/internship/')
 
         args = {'form': form}
-        return render(request, self.template_name, args)
+        return render(request,self.template_name,args)
 
 
 # def internship(request):
@@ -200,13 +201,13 @@ class InternshipView(TemplateView):
 class AchievementView(TemplateView):
     template_name = 'dappx/achievement.html'
 
-    def get(self, request):
+    def get(self,request):
         form = AchievementForm()
         # posts = Education.object.all()
         args = {'form': form}
-        return render(request, self.template_name, args)
+        return render(request,self.template_name,args)
 
-    def post(self, request):
+    def post(self,request):
         form = AchievementForm(request.POST)
         if form.is_valid():
             post = form.save(commit=False)
@@ -217,7 +218,7 @@ class AchievementView(TemplateView):
             return redirect('/dappx/achievement/')
 
         args = {'form': form}
-        return render(request, self.template_name, args)
+        return render(request,self.template_name,args)
 
 
 # def achievement(request):
@@ -225,13 +226,13 @@ class AchievementView(TemplateView):
 class HobbiesView(TemplateView):
     template_name = 'dappx/hobbie.html'
 
-    def get(self, request):
+    def get(self,request):
         form = HobbiesForm()
         # posts = Education.object.all()
         args = {'form': form}
-        return render(request, self.template_name, args)
+        return render(request,self.template_name,args)
 
-    def post(self, request):
+    def post(self,request):
         form = HobbiesForm(request.POST)
         if form.is_valid():
             post = form.save(commit=False)
@@ -242,7 +243,7 @@ class HobbiesView(TemplateView):
             return redirect('/dappx/hobbie/')
 
         args = {'form': form}
-        return render(request, self.template_name, args)
+        return render(request,self.template_name,args)
 
 
 # def achievement(request):
@@ -250,22 +251,22 @@ class HobbiesView(TemplateView):
 
 
 def hobbie(request):
-    return render(request, 'dappx/hobbie.html')
+    return render(request,'dappx/hobbie.html')
 
 
 def my_resumes(request):
     user = request.user
     # resumes = Resume.objects.filter(user=user).order_by('-created_at')
-    return render(request, 'dappx/profile.html', {})
+    return render(request,'dappx/profile.html',{})
 
 
-FORMS = [('resumes', ResumeForm),
-         ('work_experience', WorkExperienceFormSet),
-         ('certifications', CertificationFormSet),
+FORMS = [('resumes',ResumeForm),
+         ('work_experience',WorkExperienceFormSet),
+         ('certifications',CertificationFormSet),
          # ('career', CareerFormSet),
          # ('education', EducationFormSet),
          ]
-FORM_TYPES = ('work_experience', 'certifications', 'education', 'career',)
+FORM_TYPES = ('work_experience','certifications','education','career',)
 TEMPLATES = {'resumes': 'dappx/profile.html',
              'work_experience': 'dappx/education.html',
              'certifications': 'dappx/additional.html',
@@ -306,11 +307,11 @@ def register(request):
             profile.save()
             registered = True
         else:
-            print(user_form.errors, profile_form.errors)
+            print(user_form.errors,profile_form.errors)
     else:
         user_form = UserForm()
         profile_form = UserProfileInfoForm()
-    return render(request, 'dappx/registration.html',
+    return render(request,'dappx/registration.html',
                   {'user_form': user_form,
                    'profile_form': profile_form,
                    'registered': registered})
@@ -320,19 +321,19 @@ def user_login(request):
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
-        user = authenticate(username=username, password=password)
+        user = authenticate(username=username,password=password)
         if user:
             if user.is_active:
-                login(request, user)
+                login(request,user)
                 return HttpResponseRedirect(reverse('index'))
             else:
                 return HttpResponse("Your account was inactive.")
         else:
             print("Someone tried to login and failed.")
-            print("They used username: {} and password: {}".format(username, password))
+            print("They used username: {} and password: {}".format(username,password))
             return HttpResponse("Invalid login details given")
     else:
-        return render(request, 'dappx/login.html', {})
+        return render(request,'dappx/login.html',{})
 
 # def get_name(request):
 #    if request.method == 'POST':

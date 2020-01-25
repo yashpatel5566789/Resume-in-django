@@ -10,6 +10,11 @@
             {{ form.as_p }}
             <input type="submit" value="Submit">
         </form>
+        <h2>{{ text }}</h2>
+        {% for post in posts %}
+        <h1>{{ post.post }}</h1>
+        <p>{{ post.resume.get_full }}</p>
+        {% endfor %}
         <div class="container"><br>
             <a class="btn btn-primary" href="/dappx/project">Next</a>
         </div>

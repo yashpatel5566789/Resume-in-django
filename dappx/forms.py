@@ -112,8 +112,8 @@ class EducationForm(forms.ModelForm):
 
     class Meta:
         model = Education
-        fields = "__all__"
-        # fields = ['exam','school', 'degree','cgpa',]
+        #fields = "__all__"
+        fields = ['exam','school', 'degree','cgpa',]
 
 
 # class EducationForm(forms.Form):
