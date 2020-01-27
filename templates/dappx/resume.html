@@ -1,0 +1,53 @@
+{% extends "dappx/base.html" %}
+{% load static %}
+{% block body_block %}
+<div class="container">
+    <div class="jumbotron">
+        <h1>Resume</h1>
+        <h3>Profile</h3>
+        {% for profile in profiles %}
+        <h6>{{ profile.name }}</h6>
+        <h6>{{ profile.phone_number }}</h6>
+        <h6>{{ profile.email }}</h6>
+        {% endfor %}
+        <h3>Career Objective</h3>
+        {% for career in careers %}
+        <h6>{{ career.career }}</h6>
+        {% endfor %}
+        <h3>Education Qualifications</h3>
+        {% for education in educations %}
+        <h6>{{ education.exam }}</h6>
+        <h6>{{ education.school }}</h6>
+        <h6>{{ education.degree }}</h6>
+        <h6>{{ education.cgpa }}</h6>
+        {% endfor %}
+        <h3>Project</h3>
+        {% for project in projects %}
+        <h6>{{ project.project_name }}</h6>
+        <h6>{{ project.deseription }}</h6>
+        <h6>{{ project.role }}</h6>
+        <h6>{{ project.platform }}</h6>
+        {% endfor %}
+        <h3>Additional Courses</h3>
+        {% for additional in additionals %}
+        <h6>{{ additional.course_name }}</h6>
+        {% endfor %}
+        <h3>Internship</h3>
+        {% for internship in internships %}
+        <h6>{{ internship.company_nmae }}</h6>
+        <h6>{{ internship.project_name }}</h6>
+        <h6>{{ internship.Start_date }}</h6>
+        <h6>{{ internship.end_date }}</h6>
+        {% endfor %}
+        <h3>Achievements</h3>
+        {% for achievement in achievements %}
+        <h6>{{ achievement.achievement }}</h6>
+        {% endfor %}
+        <h3>Hobbies</h3>
+        {% for hobbies in hobbies %}
+        <h6>{{ hobbies.hobbies }}</h6>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

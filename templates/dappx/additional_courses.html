@@ -9,6 +9,10 @@
             {{ form.as_p }}
             <input type="submit" value="Submit">
         </form><br>
+        {% for q in qs %}
+        <h6>{{ q.resume }}</h6>
+        <h6>Additional Courses: {{ q.course_name }}</h6>
+        {% endfor %}
         <span onclick="newElement()" class="addBtn"> &nbsp; <Button class="btn btn-primary btn-sm">Add</Button></span>
 
 

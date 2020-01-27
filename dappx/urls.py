@@ -1,7 +1,7 @@
 from django.conf.urls import url
 from dappx import views
 from .views import EducationView,CareerView,ProjectView, \
-    InternshipView,AchievementView,HobbiesView,Additional_coursesView, ProfileView
+    InternshipView,AchievementView,HobbiesView,Additional_coursesView, ProfileView, ResumeView
 
 # SET THE NAMESPACE!
 app_name = 'dappx'
@@ -26,4 +26,5 @@ urlpatterns = [
     url(r'^hobbie/$',HobbiesView.as_view(),name='hobbie'),
     url(r'^additional/$',Additional_coursesView.as_view(),name='additional'),
     url(r'^profile/$',ProfileView.as_view(),name='profile'),
+    url(r'^resume/$',ResumeView.as_view(),name='resume'),
 ]

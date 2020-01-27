@@ -9,6 +9,13 @@
             {{ form.as_p }}
             <input type="submit" value="Submit">
         </form>
+        {% for q in qs %}
+        <h6>{{ q.resume }}</h6>
+        <h6>Project Name: {{ q.project_name }}</h6>
+        <h6>Description: {{ q.description }}</h6>
+        <h6>Role: {{ q.role }}</h6>
+        <h6>Platform: {{ q.platform }}</h6><br>
+        {% endfor %}
         <div class="container"><br>
             <a class="btn btn-primary" href="/dappx/additional">Next</a>
         </div>

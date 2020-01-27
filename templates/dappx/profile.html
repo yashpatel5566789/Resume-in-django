@@ -9,6 +9,12 @@
             {{ form.as_p }}
             <input type="submit" value="Submit">
         </form>
+        {% for q in qs %}
+        <h6>{{ q.user }}</h6>
+        <h6>Name: {{ q.name }}</h6>
+        <h6>Phone NUmber: {{ q.phone_number }}</h6>
+        <h6>Email: {{ q.email }}</h6>
+        {% endfor %}
         <div class="container"><br>
             <a class="btn btn-primary" href="/dappx/career">Next</a>
 

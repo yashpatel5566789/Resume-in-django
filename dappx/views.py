@@ -4,8 +4,9 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, redirect
 from django.urls import reverse
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, ListView
 from .forms import EducationForm
+
 # from formtools.wizard.views import SessionWizardView
 from .forms import (
     ResumeForm,
@@ -22,11 +23,11 @@ from .forms import (
     # CareerFormSet,
     # EducationFormSet
 )
-from .models import Education
-
+from .models import Education , Profile , Career , Project, Additional_courses, Internship, Achievement, Hobbies
 
 class EducationView(TemplateView):
     template_name = 'dappx/education.html'
+    
 
     def get_queryset(self, request):
         qs = Education.objects.all()
@@ -59,10 +60,14 @@ def index(request):
 class ProfileView(TemplateView):
     template_name = 'dappx/profile.html'
 
+    def get_queryset(self, request):
+        qs = Profile.objects.all()
+        return render(request, self.template_name, {'qs': qs })
+
     def get(self, request):
         form = ProfileForm()
-        # posts = Education.object.all()
-        args = {'form': form}
+        qs = Profile.objects.all()
+        args = {'form': form, 'qs': qs}
         return render(request, self.template_name, args)
 
     def post(self, request):
@@ -86,10 +91,14 @@ class ProfileView(TemplateView):
 class CareerView(TemplateView):
     template_name = 'dappx/career.html'
 
+    def get_queryset(self, request):
+        qs = Career.objects.all()
+        return render(request, self.template_name, {'qs': qs })
+
     def get(self, request):
         form = CareerForm()
-        # posts = Education.object.all()
-        args = {'form': form}
+        qs = Career.objects.all()
+        args = {'form': form, 'qs': qs}
         return render(request, self.template_name, args)
 
     def post(self, request):
@@ -127,10 +136,14 @@ class CareerView(TemplateView):
 class ProjectView(TemplateView):
     template_name = 'dappx/project.html'
 
+    def get_queryset(self, request):
+        qs = Project.objects.all()
+        return render(request, self.template_name, {'qs': qs })
+
     def get(self, request):
         form = ProjectForm()
-        # posts = Education.object.all()
-        args = {'form': form}
+        qs = Project.objects.all()
+        args = {'form': form, 'qs': qs}
         return render(request, self.template_name, args)
 
     def post(self, request):
@@ -152,11 +165,16 @@ class ProjectView(TemplateView):
 class Additional_coursesView(TemplateView):
     template_name = 'dappx/additional_courses.html'
 
+    def get_queryset(self, request):
+        qs = Additional_courses.objects.all()
+        return render(request, self.template_name, {'qs': qs })
+
     def get(self, request):
         form = Additional_coursesForm()
-        # posts = Education.object.all()
-        args = {'form': form}
+        qs = Additional_courses.objects.all()
+        args = {'form': form, 'qs': qs}
         return render(request, self.template_name, args)
+
 
     def post(self, request):
         form = Additional_coursesForm(request.POST)
@@ -179,11 +197,16 @@ class Additional_coursesView(TemplateView):
 class InternshipView(TemplateView):
     template_name = 'dappx/internship.html'
 
+    def get_queryset(self, request):
+        qs = Internship.objects.all()
+        return render(request, self.template_name, {'qs': qs })
+
     def get(self, request):
         form = InternshipForm()
-        # posts = Education.object.all()
-        args = {'form': form}
+        qs = Internship.objects.all()
+        args = {'form': form, 'qs': qs}
         return render(request, self.template_name, args)
+
 
     def post(self, request):
         form = InternshipForm(request.POST)
@@ -204,12 +227,16 @@ class InternshipView(TemplateView):
 
 class AchievementView(TemplateView):
     template_name = 'dappx/achievement.html'
+    def get_queryset(self, request):
+        qs = Achievement.objects.all()
+        return render(request, self.template_name, {'qs': qs })
 
     def get(self, request):
         form = AchievementForm()
-        # posts = Education.object.all()
-        args = {'form': form}
+        qs = Achievement.objects.all()
+        args = {'form': form, 'qs': qs}
         return render(request, self.template_name, args)
+
 
     def post(self, request):
         form = AchievementForm(request.POST)
@@ -230,11 +257,16 @@ class AchievementView(TemplateView):
 class HobbiesView(TemplateView):
     template_name = 'dappx/hobbie.html'
 
+    def get_queryset(self, request):
+        qs = Hobbies.objects.all()
+        return render(request, self.template_name, {'qs': qs })
+
     def get(self, request):
         form = HobbiesForm()
-        # posts = Education.object.all()
-        args = {'form': form}
+        qs = Hobbies.objects.all()
+        args = {'form': form, 'qs': qs}
         return render(request, self.template_name, args)
+
 
     def post(self, request):
         form = HobbiesForm(request.POST)
@@ -254,8 +286,8 @@ class HobbiesView(TemplateView):
 #    return render(request, 'dappx/achievement.html')
 
 
-def hobbie(request):
-    return render(request, 'dappx/hobbie.html')
+#def hobbie(request):
+#    return render(request, 'dappx/hobbie.html')
 
 
 def my_resumes(request):
@@ -350,3 +382,29 @@ def user_login(request):
 #            form.save()
 #
 #        return render(request, 'education.html',{'form':form})
+
+#class ResumeView(ListView):
+#    model = Profile
+#    template_name = 'dappx/resume.html'
+#
+#    def get_context_data(self, **kwargs):
+#        ctx = super(ResumeView, self).get_context_data(**kwargs)
+#        ctx['Profle'] = Profile.objects.all()
+#        return ctx
+
+class ResumeView(ListView):
+    context_object_name = 'resume'
+    template_name = 'dappx/resume.html'
+    queryset = Profile.objects.all()
+
+    def get_context_data(self, **kwargs):
+        context = super(ResumeView, self).get_context_data(**kwargs)
+        context['educations'] = Education.objects.all()
+        context['careers'] = Career.objects.all()
+        context['projects'] = Project.objects.all()
+        context['additionals'] = Additional_courses.objects.all()
+        context['internships'] = Internship.objects.all()
+        context['achievements'] = Achievement.objects.all()
+        context['hobbies'] = Hobbies.objects.all()
+        context['profiles'] = self.queryset
+        return context
