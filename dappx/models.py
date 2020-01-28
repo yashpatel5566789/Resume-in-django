@@ -66,7 +66,7 @@ class Profile(models.Model):
     #   sub_expires_on = models.DateTimeField(blank=True, null=True)
 
     def __str__(self):
-        return self.user.name
+        return self.user.username
 
 
 class Certification(models.Model):

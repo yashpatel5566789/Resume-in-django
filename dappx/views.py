@@ -74,7 +74,7 @@ class ProfileView(TemplateView):
         form = ProfileForm(request.POST)
         if form.is_valid():
             post = form.save(commit=False)
-            post.resume = request.resume
+            #post.resume = request.resume
             post.save()
             # text = form.cleaned_data['exam']
             form = EducationForm()
